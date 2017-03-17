@@ -56,7 +56,7 @@ class Slider extends Component {
     this.state = {
       limit: 0,
       grab: 0,
-      onFocusValue: 0
+      onFocusValue: props.value
     }
   }
 

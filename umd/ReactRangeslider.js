@@ -286,7 +286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.state = {
 	      limit: 0,
 	      grab: 0,
-	      onFocusValue: 0
+	      onFocusValue: props.value
 	    };
 	    return _this;
 	  }
