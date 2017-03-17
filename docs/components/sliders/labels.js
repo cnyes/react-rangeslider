@@ -57,6 +57,7 @@ class HorizontalCustomLabels extends Component {
           labels={verticalLabels}
           format={formatPc}
           onChange={this.handleChangeVertical}
+          onFocusClassName={'onFocus'}
         />
         <div className='value'>{formatPc(vertical)}</div>
       </div>

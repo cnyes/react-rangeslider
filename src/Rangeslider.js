@@ -55,7 +55,8 @@ class Slider extends Component {
 
     this.state = {
       limit: 0,
-      grab: 0
+      grab: 0,
+      onFocusValue: 0
     }
   }
 
@@ -129,8 +130,11 @@ class Slider extends Component {
       value = parseFloat(target.dataset.value)
     }
 
+    this.setState({
+      onFocusValue: value
+    }, onChange && onChange(value, e))
+
     // const value = target.classList.contains('rangeslider__label') ? 10 : this.position(e)
-    onChange && onChange(value, e)
   }
 
   /**
@@ -242,7 +246,8 @@ class Slider extends Component {
   }
 
   render () {
-    const { value, orientation, className, tooltip, reverse } = this.props
+    const { value, orientation, className, tooltip, reverse, onFocusClassName } = this.props
+    const { onFocusValue } = this.state
     const dimension = constants.orientation[orientation].dimension
     const direction = reverse ? constants.orientation[orientation].reverseDirection : constants.orientation[orientation].direction
     const position = this.getPositionFromValue(value)
@@ -261,10 +266,12 @@ class Slider extends Component {
         const labelPosition = this.getPositionFromValue(key)
         const labelCoords = this.coordinates(labelPosition)
         const labelStyle = {[direction]: `${labelCoords.label}px`}
+        const className = onFocusValue.toString() === key ? cx('rangeslider__label', onFocusClassName) : cx('rangeslider__label')
+
         items.push((
           <li
             key={key}
-            className={cx('rangeslider__label')}
+            className={className}
             data-value={key}
             onMouseDown={this.handleDrag}
             onTouchStart={this.handleDrag}
